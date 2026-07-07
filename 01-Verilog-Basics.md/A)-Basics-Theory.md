@@ -22,28 +22,7 @@ Quick Summary of Key ConceptsPort Directions: input (data enters module), output
 In Verilog, data types are divided into two primary hardware-representative categories: Nets (which represent physical connections) and Variables/Registers (which abstractly represent data storage elements).
 
 All basic Verilog data types operate on a 4-state value system consisting of 0 (false), 1 (true), X (unknown), and Z (high impedance).
-
-| Data Type | Synthesizable? | LHS of `assign`? | LHS of `always`? | Default | Main Use |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **`net` / `wire`** | ✅ Yes | ✅ Yes | ❌ No | `z` | Physical connections / structural wiring |
-| **`reg`** | ✅ Yes | ❌ No | ✅ Yes | `x` | Procedural blocks (FFs, latches, or combo logic) |
-| **`integer`** | ⚠️ Loop variables | ❌ No | ✅ Yes | `x` | 32-bit signed math / loop counters |
-| **`real`** | ❌ No | ❌ No | ✅ Yes | `0.0` | 64-bit float math (Simulation only) |
-| **`time`** | ❌ No | ❌ No | ✅ Yes | `x` | 64-bit unsigned simulation timestamps |
-| **`string`** | ❌ No | ❌ No | ✅ Yes | `""` | Text messages & testbench debugging |
-
-
-
-
-
-# Verilog & SystemVerilog Core Data Types Reference
-
-A quick-reference guide mapping the fundamental data types, their hardware behaviors, and their synthesizability for digital design and verification.
-
 ---
-
-## 📋 Data Types Breakdown
-
 ### 1. net (e.g., `wire`)
 * **Hardware Analogy:** A physical piece of copper wire.
 * **Behavior:** **Does not store values.** It continuously reflects the value of whatever is actively driving it (via a gate output or an `assign` statement). 
