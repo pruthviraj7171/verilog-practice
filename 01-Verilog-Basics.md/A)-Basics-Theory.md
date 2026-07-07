@@ -73,6 +73,20 @@ All basic Verilog data types operate on a 4-state value system consisting of 0 (
 
 ---
 
+## *Number Representation*
+
+
+### Syntax Template
+```verilog
+<size>'<sign><base><value>
+
+Size: (Optional) Constant specifying the total number of bits.
+
+Sign: (Optional) s or S for signed (defaults to unsigned).
+
+Base: b (binary), o (octal), d (decimal), h (hex).
+
+Value: The actual digits (case-insensitive for hex/bases).
 
 
 
