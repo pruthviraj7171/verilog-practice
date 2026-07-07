@@ -75,8 +75,6 @@ All basic Verilog data types operate on a 4-state value system consisting of 0 (
 
 ## *Number Representation*
 
-# Verilog Number Representation Quick-Ref
-
 ### 📝 Syntax Template
 
 *<size>'<sign><base><value>*
