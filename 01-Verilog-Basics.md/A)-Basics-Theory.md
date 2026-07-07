@@ -75,10 +75,12 @@ All basic Verilog data types operate on a 4-state value system consisting of 0 (
 
 ## *Number Representation*
 
+# Verilog Number Representation Quick-Ref
 
-### Syntax Template
-```verilog
-<size>'<sign><base><value>
+### 📝 Syntax Template
+
+*<size>'<sign><base><value>*
+
 
 Size: (Optional) Constant specifying the total number of bits.
 
@@ -89,8 +91,52 @@ Base: b (binary), o (octal), d (decimal), h (hex).
 Value: The actual digits (case-insensitive for hex/bases).
 
 
+# Verilog Operators & Parameters Quick-Ref
 
+## ⚙️ 1. Operators Cheat Sheet
+Grouped by priority (highest to lowest) and hardware behavior.
 
+### Arithmetic & Shift
+| Operator | Type | Behavior | Synthesizable? |
+| :---: | :--- | :--- | :---: |
+| `+`, `-`, `*` | Arithmetic | Add, Subtract, Multiply | ✅ Yes |
+| `/`, `%` | Arithmetic | Divide, Modulo | ⚠️ Only if power of 2 (or heavy area footprint) |
+| `<<`, `>>` | Logical Shift | Shift left/right (vacated bits filled with `0`) | ✅ Yes (Wire shifting) |
+| `<<<`, `>>>` | Arithmetic Shift | Shift left/right (right shift maintains sign bit) | ✅ Yes |
+
+### Logical & Bitwise
+| Operator | Type | Behavior | Synthesizable? |
+| :---: | :--- | :--- | :---: |
+| `!`, `&&`, `\|\|` | Logical | Outputs single-bit scalar (`1` or `0`) | ✅ Yes |
+| `~`, `&`, `\|`, `^`, `~^` | Bitwise | Bit-by-bit operations across entire width | ✅ Yes (Gates) |
+| `&`, `\|`, `^` (unary) | Reduction | Operates on all bits of a *single* vector ➡️ 1-bit result | ✅ Yes |
+
+### Relational & Equality
+| Operator | Type | Behavior | Synthesizable? |
+| :---: | :--- | :--- | :---: |
+| `>`, `<`, `>=`, `<=` | Relational | Compares magnitudes | ✅ Yes (Comparators) |
+| `==`, `!=` | Logical Equality | Compares values; returns `x` if `x`/`z` present | ✅ Yes |
+| `===`, `!==` | Case Equality | Matches strictly including `x` and `z` | ❌ No (Simulation only) |
+
+### Miscellaneous
+| Operator | Type | Behavior | Synthesizable? |
+| :---: | :--- | :--- | :---: |
+| `{ }` | Concatenation | Joins bits together into a larger vector | ✅ Yes |
+| `{N{ }}` | Replication | Repeats a bit pattern `N` times | ✅ Yes |
+| `? :` | Conditional | Ternary operator (Mux logic) | ✅ Yes (Multiplexer) |
+
+---
+
+## 🛠️ 2. Parameters (Constants)
+Used to create reusable, configurable modules. 
+
+### `parameter` (Module-level)
+* Can be overridden at instantiation time.
+* **Syntax:** `parameter WIDTH = 8;`
+* **Override Example:**
+```verilog
+// Instantiating a module and overriding its default parameter
+my_design #(.WIDTH(16)) uut (.clk(clk), .data(data));
 
 
 
