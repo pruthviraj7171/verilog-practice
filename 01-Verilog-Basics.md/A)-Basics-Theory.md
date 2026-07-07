@@ -32,7 +32,66 @@ All basic Verilog data types operate on a 4-state value system consisting of 0 (
 | **`time`** | ❌ No | ❌ No | ✅ Yes | `x` | 64-bit unsigned simulation timestamps |
 | **`string`** | ❌ No | ❌ No | ✅ Yes | `""` | Text messages & testbench debugging |
 
- 
+
+
+
+
+# Verilog & SystemVerilog Core Data Types Reference
+
+A quick-reference guide mapping the fundamental data types, their hardware behaviors, and their synthesizability for digital design and verification.
+
+---
+
+## 📋 Data Types Breakdown
+
+### 1. net (e.g., `wire`)
+* **Hardware Analogy:** A physical piece of copper wire.
+* **Behavior:** **Does not store values.** It continuously reflects the value of whatever is actively driving it (via a gate output or an `assign` statement). 
+* **Default Value:** `z` (high impedance/floating) when undriven.
+* **Context:** Used to connect structural elements or modules together.
+
+### 2. reg
+* **Hardware Analogy:** A data storage element (can synthesize to a Flip-Flop, Latch, or pure combinational wire depending on how it's used).
+* **Behavior:** **Stores its value** until a new value is explicitly assigned to it. 
+* **Default Value:** `x` (unknown) at simulation start.
+* **Context:** Must be used on the left-hand side (LHS) of procedural assignments inside `always` or `initial` blocks.
+
+### 3. integer
+* **Type:** A general-purpose register data type.
+* **Properties:** **32-bit signed** quantity. It holds 4-state logic values (`0`, `1`, `x`, `z`).
+* **Context:** Most commonly used as loop control variables (e.g., in `for` loops) and for simple arithmetic constants during simulation.
+
+### 4. real
+* **Type:** Floating-point numbers.
+* **Properties:** **64-bit double-precision** floating-point number (adheres to IEEE 754 standard). 
+* **Limitation:** Cannot hold `x` or `z` states; defaults to `0.0` if ambiguous. **Non-synthesizable** (simulation-only).
+* **Context:** Used for high-level mathematical modeling, delays, and analog-mixed-signal (AMS) simulations.
+
+### 5. time
+* **Type:** Unsigned 64-bit integer.
+* **Properties:** Holds 4-state logic, but strictly handles **positive integers** representing simulation timestamps.
+* **Context:** Used in conjunction with the `$time` system task to record, measure, and debug simulation delays.
+
+### 6. string *(SystemVerilog)*
+* **Type:** A variable-length, dynamically allocated array of bytes (characters).
+* **Properties:** Purely for simulation/testbenches. Each character is an 8-bit ASCII value.
+* **Context:** Used for printing debug messages, formatting display tasks (`$display`), and tracking test case names in testbenches.
+
+---
+
+## ⚡ Synthesis & Placement Cheat Sheet
+
+| Data Type | Allowed inside `assign` (LHS)? | Allowed inside `always` (LHS)? | Synthesizable? | Default State |
+| :--- | :---: | :---: | :---: | :---: |
+| **`net` (`wire`)** |  ✅ Yes |  ❌ No |  ✅ Yes | `z` |
+| **`reg`** |  ❌ No |  ✅ Yes |  ✅ Yes | `x` |
+| **`integer`** |  ❌ No |  ✅ Yes |  ⚠️ Yes *(mainly loops)* | `x` |
+| **`real`** |  ❌ No |  ✅ Yes |  ❌ No *(Simulation Only)* | `0.0` |
+| **`time`** |  ❌ No |  ✅ Yes |  ❌ No *(Simulation Only)* | `x` |
+| **`string`** |  ❌ No |  ✅ Yes |  ❌ No *(Simulation Only)* | `""` (empty) |
+
+---
+
 
 
 
