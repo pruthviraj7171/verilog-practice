@@ -1,4 +1,6 @@
-// 1) Code Half Subtractor
+// 1) Code Full Subctractor Using Two Half Subctractor
+
+// 1) Half Subctractor
 module half_subtractor(
     input a, b,
     output diff, borrow
