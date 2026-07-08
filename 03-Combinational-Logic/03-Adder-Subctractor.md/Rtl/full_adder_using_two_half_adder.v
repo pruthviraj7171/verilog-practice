@@ -9,7 +9,7 @@ module half_adder(
   assign carry = a ^ b;
 endmodule  
 
-//Full Adder
+//Full Adder Using Two Half Adder
 module full_adder(
   input a,b,cin,
   output sum,carry
