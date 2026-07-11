@@ -12,7 +12,7 @@
 
   ### *FOR EXAMPLE* :- pyton
 
-   age = 20
+   age = 20:
 
        if age < 20
             print("You are above age u are allow for marriage")
