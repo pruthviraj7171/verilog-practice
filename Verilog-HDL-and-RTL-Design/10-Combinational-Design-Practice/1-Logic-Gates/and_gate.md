@@ -1,15 +1,27 @@
-# AND GATE using Verilog
+# AND Gate using Verilog
+
+## Design Code
 
 ```verilog
 `timescale 1ns / 1ps
-// Code and_gate
+// AND Gate Design
 
-module and_gate (a,b,y);
-
-input a;
-input b;
-output y;
+module and_gate (
+    input a,
+    input b,
+    output y
+);
 
 assign y = a & b;
 
 endmodule
+```
+# truth table
+
+# Test bench 
+
+
+
+# schametic 
+
+# simulation
