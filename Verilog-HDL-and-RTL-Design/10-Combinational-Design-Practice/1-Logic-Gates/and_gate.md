@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 // Code and_gate.v
 
 module and_gate (a,b,y);
